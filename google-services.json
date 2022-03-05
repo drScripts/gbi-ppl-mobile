@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "336575943455",
+    "project_id": "gbi-ppl-project",
+    "storage_bucket": "gbi-ppl-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336575943455:android:dd53b55e5282d33b38562a",
+        "android_client_info": {
+          "package_name": "com.gbippl.gbippl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336575943455-dk4hu69dmhu94okgptkj646mpj57gfih.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gbippl.gbippl",
+            "certificate_hash": "dcd61de6c53dade3b62c873fa8934ac341d21fab"
+          }
+        },
+        {
+          "client_id": "336575943455-ittf5150q1sbo1nb5efmvnlhcvs0u8jk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq0x6rZiU-bE9P8OrTy_aEChxt51vJvH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336575943455-ittf5150q1sbo1nb5efmvnlhcvs0u8jk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
