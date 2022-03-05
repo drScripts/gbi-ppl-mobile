@@ -44,7 +44,22 @@ const Announcementcontainer = ({ navigation }) => {
   const { user } = useAuth();
 
   const onReachBottom = async () => {
-    console.log(`/${nextUrl}`);
+    if (nextUrl) {
+      const { data, message, status } = await getWithAuth({
+        urlPath: nextUrl,
+        token: user.token,
+      });
+
+      if (status === 200) {
+        setAnnouncement(data.data);
+
+        if (data.next_page_url) {
+          const path = data.next_page_url.split("/");
+
+          setNextUrl(path[path.length - 1]);
+        }
+      }
+    }
   };
 
   const getAnnouncement = async () => {

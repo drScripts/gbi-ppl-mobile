@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://823a-103-121-197-106.ngrok.io/api",
+  baseURL: "https://1a78-103-121-197-106.ngrok.io/api",
 });
 
 export const get = async ({ pathUrl }) => {

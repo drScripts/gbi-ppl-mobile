@@ -11,6 +11,7 @@ import useAuth from "../hooks/useAuth";
 import GeneralScreen from "./GeneralScreen";
 import { VerticalSpacer } from "../shared";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Generalbutton } from "../components/InputComponent";
 
 const UserProfileItem = ({ title, value, placeholder, readOnly = false }) => {
   return (
@@ -70,13 +71,13 @@ const Usersscreen = () => {
           readOnly={true}
         />
 
-        <Pressable
-          onPress={async () => {
+        <Generalbutton
+          title={"Logout"}
+          style={styles.logoutBtn}
+          onPressed={async () => {
             await logOut();
           }}
-        >
-          <Text>Logout</Text>
-        </Pressable>
+        />
       </View>
     </GeneralScreen>
   );
@@ -118,6 +119,10 @@ const styles = StyleSheet.create({
   },
   mb20: {
     marginBottom: 20,
+  },
+  logoutBtn: {
+    marginTop: 20,
+    backgroundColor: "red",
   },
 });
 

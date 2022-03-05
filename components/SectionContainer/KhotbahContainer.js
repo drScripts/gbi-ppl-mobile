@@ -22,23 +22,38 @@ const KhotbahCard = ({ item }) => {
 };
 
 const KhotbahContainer = () => {
-  const [announcement, setAnnouncement] = useState([]);
+  const [khotbah, setkhotbah] = useState([]);
   const [nextUrl, setNextUrl] = useState("");
 
   const { user } = useAuth();
 
   const onReachBottom = async () => {
-    console.log(`/${nextUrl}`);
+    if (nextUrl) {
+      const { data, message, status } = await getWithAuth({
+        urlPath: nextUrl,
+        token: user.token,
+      });
+
+      if (status === 200) {
+        setkhotbah(data.data);
+
+        if (data.next_page_url) {
+          const path = data.next_page_url.split("/");
+
+          setNextUrl(path[path.length - 1]);
+        }
+      }
+    }
   };
 
-  const getAnnouncement = async () => {
+  const getkhotbah = async () => {
     const { data, message, status } = await getWithAuth({
       urlPath: "/khotbah",
       token: user.token,
     });
 
     if (status === 200) {
-      setAnnouncement(data.data);
+      setkhotbah(data.data);
 
       if (data.next_page_url) {
         const path = data.next_page_url.split("/");
@@ -49,13 +64,13 @@ const KhotbahContainer = () => {
   };
 
   useEffect(() => {
-    getAnnouncement();
+    getkhotbah();
   }, []);
 
   return (
     <FlatList
       nestedScrollEnabled
-      data={announcement}
+      data={khotbah}
       renderItem={KhotbahCard}
       onEndReached={onReachBottom}
       ListHeaderComponent={
