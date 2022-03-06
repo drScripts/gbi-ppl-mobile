@@ -1,7 +1,11 @@
 import { StyleSheet, StatusBar, View } from "react-native";
 
-export const VerticalSpacer = () => {
-  return <View style={generalStyles.spacer} />;
+export const VerticalSpacer = ({ customHeight }) => {
+  return (
+    <View
+      style={customHeight ? { height: customHeight } : generalStyles.spacer}
+    />
+  );
 };
 
 export const generalStyles = StyleSheet.create({
@@ -16,6 +20,6 @@ export const generalStyles = StyleSheet.create({
     justifyContent: "center",
   },
   spacer: {
-    height: 90,
+    height: 70,
   },
 });

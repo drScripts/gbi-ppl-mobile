@@ -8,6 +8,7 @@ import Otpverifyscreen from "../screens/OtpVerifyScreen";
 import QRScanBarcode from "../screens/QRScanbarcode";
 import UsersScreen from "../screens/UsersScreen";
 import DetailPostPage from "../screens/DetailPostPage";
+import KhotbahDetail from "../screens/KhotbahDetail";
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ const Stacknavigator = () => {
             <Stack.Screen name="Home" component={Tabnavigator} />
             <Stack.Screen name="UserSettings" component={UsersScreen} />
             <Stack.Screen name="DetailPostPage" component={DetailPostPage} />
+            <Stack.Screen name="DetailKhotbah" component={KhotbahDetail} />
           </>
         ) : (
           <>

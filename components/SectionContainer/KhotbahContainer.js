@@ -1,27 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Image, Text, FlatList } from "react-native";
+import React, { useState, useCallback } from "react";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  FlatList,
+  Pressable,
+} from "react-native";
 import { getWithAuth } from "../../services/UserServices";
 import useAuth from "../../hooks/useAuth";
 import { VerticalSpacer } from "../../shared";
 import Bannercarousel from "./BannerCarousel";
+import { useFocusEffect } from "@react-navigation/native";
 
-const KhotbahCard = ({ item }) => {
+const KhotbahCard = ({ item, navigation }) => {
   return (
-    <View style={styles.wrapContainer}>
-      <View style={styles.card}>
-        <Image source={{ uri: item.image_path }} style={styles.image} />
-        <Text numberOfLines={2} ellipsizeMode={"tail"} style={styles.title}>
-          {`${item.title} - ${item.bahan}`}
-        </Text>
-        <Text numberOfLines={3} ellipsizeMode={"tail"}>
-          {item.khotbah}
-        </Text>
+    <Pressable
+      onPress={() => {
+        navigation.navigate("DetailKhotbah", {
+          item,
+        });
+      }}
+    >
+      <View style={styles.wrapContainer}>
+        <View style={styles.card}>
+          <Image source={{ uri: item.image_path }} style={styles.image} />
+          <Text numberOfLines={2} ellipsizeMode={"tail"} style={styles.title}>
+            {`${item.title} - ${item.bahan}`}
+          </Text>
+          <Text numberOfLines={3} ellipsizeMode={"tail"}>
+            {item.khotbah}
+          </Text>
+        </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
-const KhotbahContainer = () => {
+const KhotbahContainer = ({ navigation }) => {
   const [khotbah, setkhotbah] = useState([]);
   const [nextUrl, setNextUrl] = useState("");
 
@@ -29,7 +45,7 @@ const KhotbahContainer = () => {
 
   const onReachBottom = async () => {
     if (nextUrl) {
-      const { data, message, status } = await getWithAuth({
+      const { data, status } = await getWithAuth({
         urlPath: nextUrl,
         token: user.token,
       });
@@ -47,7 +63,7 @@ const KhotbahContainer = () => {
   };
 
   const getkhotbah = async () => {
-    const { data, message, status } = await getWithAuth({
+    const { data, status } = await getWithAuth({
       urlPath: "/khotbah",
       token: user.token,
     });
@@ -63,19 +79,23 @@ const KhotbahContainer = () => {
     }
   };
 
-  useEffect(() => {
-    getkhotbah();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getkhotbah();
+    }, [])
+  );
 
   return (
     <FlatList
       nestedScrollEnabled
       data={khotbah}
-      renderItem={KhotbahCard}
+      renderItem={({ item }) => {
+        return <KhotbahCard item={item} navigation={navigation} />;
+      }}
       onEndReached={onReachBottom}
       ListHeaderComponent={
         <>
-          <VerticalSpacer />
+          <VerticalSpacer customHeight={85} />
           <Bannercarousel urlPath={"/khotbah/banner"} />
         </>
       }

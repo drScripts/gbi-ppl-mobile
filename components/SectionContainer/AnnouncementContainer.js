@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -11,6 +11,7 @@ import { getWithAuth } from "../../services/UserServices";
 import useAuth from "../../hooks/useAuth";
 import { VerticalSpacer } from "../../shared";
 import Bannercarousel from "./BannerCarousel";
+import { useFocusEffect } from "@react-navigation/native";
 
 const AnnouncementCard = ({ item, navigation }) => {
   return (
@@ -63,7 +64,7 @@ const Announcementcontainer = ({ navigation }) => {
   };
 
   const getAnnouncement = async () => {
-    const { data, message, status } = await getWithAuth({
+    const { data, status } = await getWithAuth({
       urlPath: "/announcement",
       token: user.token,
     });
@@ -79,9 +80,11 @@ const Announcementcontainer = ({ navigation }) => {
     }
   };
 
-  useEffect(() => {
-    getAnnouncement();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getAnnouncement();
+    }, [])
+  );
 
   return (
     <FlatList
@@ -93,7 +96,7 @@ const Announcementcontainer = ({ navigation }) => {
       onEndReached={onReachBottom}
       ListHeaderComponent={
         <>
-          <VerticalSpacer />
+          <VerticalSpacer customHeight={85} />
           <Bannercarousel urlPath={"/announcement/banner"} />
         </>
       }

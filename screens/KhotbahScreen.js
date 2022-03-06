@@ -2,10 +2,10 @@ import React from "react";
 import GeneralScreen from "./GeneralScreen";
 import { KhotbahContainer } from "../components/SectionContainer";
 
-const KhotbahScreen = () => {
+const KhotbahScreen = ({ navigation }) => {
   return (
     <GeneralScreen singleHeaderTitle={"Khotbah"} disableScroll={true}>
-      <KhotbahContainer />
+      <KhotbahContainer navigation={navigation} />
     </GeneralScreen>
   );
 };

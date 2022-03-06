@@ -17,7 +17,7 @@ const Homescreen = () => {
 
   return (
     <GeneralScreen headerInformation={true}>
-      <VerticalSpacer />
+      <VerticalSpacer customHeight={90} />
       {current ? (
         <HomeSection
           title={"Your Schedules"}

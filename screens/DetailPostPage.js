@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 import GeneralScreen from "./GeneralScreen";
 import { VerticalSpacer } from "../shared";
+import { Generalbutton } from "../components/InputComponent";
 
 const DetailPostPage = ({ route, navigation }) => {
   const { titlePage, item } = route.params;
@@ -12,6 +13,13 @@ const DetailPostPage = ({ route, navigation }) => {
         <Image source={{ uri: item.image_path }} style={styles.banner} />
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.body}>{item.body}</Text>
+        <Generalbutton
+          title={"Continue"}
+          style={styles.mt10}
+          onPressed={() => {
+            navigation.goBack();
+          }}
+        />
       </View>
     </GeneralScreen>
   );
@@ -35,6 +43,9 @@ const styles = StyleSheet.create({
   },
   body: {
     textAlign: "justify",
+  },
+  mt10: {
+    marginTop: 10,
   },
 });
 
