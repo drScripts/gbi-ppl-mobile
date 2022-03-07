@@ -106,6 +106,8 @@ export const AuthProvider = ({ children }) => {
     await removeUserInformation();
   };
 
+  const registerNotifToken = async () => {};
+
   useEffect(() => {
     checkUserInformation();
   }, []);
